@@ -1,0 +1,128 @@
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        background-image: linear-gradient(to right, red,orange,yellow,green,blue,indigo,violet); 
+    }
+
+    .notification {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background-color: #ffffff33;    
+        color: #fdfdfd;
+        padding: 15px 15px 15px 45px;
+        border-radius: 14.5px;
+        width: 250px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+        display: none;
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+    }
+
+    .close-btn {
+        background-color: #ffffff33;
+        color: white;
+        border: none;
+        font-size: 20px;
+        font-weight: bold;
+        cursor: pointer;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        text-align: center;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+        transition: background-color 0.2s;
+    }
+
+    .close-btn:hover {
+        background-color: #ff4a4a;
+    }
+
+    @keyframes slideIn {
+        from {
+            right: -300px;
+            opacity: 0;
+        }
+
+        to {
+            right: 20px;
+            opacity: 1;
+        }
+    }
+
+    .show-notification {
+        animation: slideIn 0.5s forwards;
+        display: block;
+        opacity: 1;
+    }
+
+    .action-btn {
+        padding: 10px 20px;
+        margin: 10px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .action-btn:hover {
+        background-color: #45a049;
+    }
+</style>
+
+<body>
+    
+
+
+<div id="notification" class="notification">
+    <button class="close-btn" onclick="closeNotification()">X</button>
+    <span id="notification-message">This is a notification!</span>
+</div>
+
+<button class="action-btn" onclick="showNotification('login')">Login</button>
+<button class="action-btn" onclick="showNotification('logout')">Logout</button>
+<button class="action-btn" onclick="showNotification('trafficViolation')">Traffic Violation</button>
+
+<script>
+
+    function showNotification(action) {
+        const notification = document.getElementById('notification');
+        const messageElement = document.getElementById('notification-message');
+
+        if (action === 'login') {
+            messageElement.textContent = 'You have successfully logged in!';
+        } else if (action === 'logout') {
+            messageElement.textContent = 'You have successfully logged out!';
+        } else if (action === 'trafficViolation') {
+            messageElement.textContent = 'You have a traffic violation. Please check your fines.';
+        }
+
+        notification.classList.add('show-notification');
+        setTimeout(()=>{closeNotification()},1000)
+    }
+
+    function closeNotification() {
+        const notification = document.getElementById('notification');
+        notification.style.opacity = '0';
+        setTimeout(function () {
+            notification.classList.remove('show-notification');
+        }, 500);
+    }
+</script>
+    
+</body>
+
